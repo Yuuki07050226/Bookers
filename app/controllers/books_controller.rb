@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.order(id:"DESC")
+    @books = Book.all
     @book = Book.new
 
   end
@@ -33,7 +33,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.update(book_params)
       flash[:notice] = "Book was successfully updated."
-      redirect_to book_path(book.id)
+      redirect_to book_path(@book.id)
     else
         flash.now[:error] = @book.errors.full_messages
         render :edit
